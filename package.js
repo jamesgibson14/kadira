@@ -1,13 +1,12 @@
 Package.describe({
   "summary": "Performance Monitoring for Meteor",
-  "version": "2.30.2",
-  "git": "https://github.com/meteorhacks/kadira.git",
-  "name": "meteorhacks:kadira"
+  "version": "1.0.0",
+  "git": "https://github.com/jamesgibson14/kadira.git",
+  "name": "argus:kadira"
 });
 
 var npmModules = {
   "debug": "0.7.4",
-  "kadira-core": "1.3.2",
   "pidusage": "1.0.1",
   "evloop-monitor": "0.1.0",
   "pidusage": "0.1.1",
@@ -135,6 +134,7 @@ function configurePackage(api) {
     'lib/hijack/set_labels.js',
     'lib/environment_variables.js',
     'lib/auto_connect.js',
+    'lib/common/send.js'
   ], 'server');
 
   // only client
@@ -154,11 +154,12 @@ function configurePackage(api) {
     // a notice to the user.
     // Actual implementation is in the meteorhacks:kadira-profiler package
     'lib/profiler/client.js',
+    'lib/client/send.js'
   ], 'client');
 
   // common after
   api.add_files([
-    'lib/common/default_error_filters.js',
-    'lib/common/send.js'
+    'lib/common/default_error_filters.js'
   ], ['client', 'server']);
+  api.export(['Kadira','Retry'], ['client', 'server']);
 }
